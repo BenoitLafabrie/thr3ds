@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "Thr3ds",
   description: "A Nextjs app made for trainng purposes",
 };
-
-export default function RootLayout({
-  children,
-}: {
+type LayoutProps = {
   children: React.ReactNode;
-}) {
+  modal?: React.ReactNode;
+};
+
+export default function RootLayout({ children, modal }: LayoutProps) {
   return (
     <html lang="en" className="h-full">
       <body className={clsx(inter.className, "bg-background h-full")}>
@@ -29,6 +29,7 @@ export default function RootLayout({
             </div>
             <Footer />
           </div>
+          {modal}
         </ThemeProvider>
       </body>
     </html>
