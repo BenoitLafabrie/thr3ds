@@ -16,7 +16,7 @@ export const WriteModal = ({
   const pathName = usePathname();
   return (
     <Dialog
-      open={pathName === "/write"}
+      open={pathName?.includes("write")}
       onOpenChange={() => {
         router.back();
       }}
