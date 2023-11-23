@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { Prisma, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -14,7 +14,7 @@ const main = async () => {
       bio: faker.lorem.paragraph(),
       link: faker.internet.url(),
       email: faker.internet.email(),
-    } satisfies Prisma.UserCreateInput;
+    } as const;
 
     const dbUser = await prisma.user.create({ data: user });
 
@@ -36,7 +36,7 @@ const main = async () => {
     const post = {
       content: faker.lorem.sentence(randomWordCount),
       userId: users[randomUserIndex].id,
-    } satisfies Prisma.PostUncheckedCreateInput;
+    };
 
     const p = await prisma.post.create({ data: post });
     posts.push(p);
@@ -56,7 +56,7 @@ const main = async () => {
     const like = {
       postId: posts[randomPostIndex].id,
       userId: users[randomUserIndex].id,
-    } satisfies Prisma.LikeUncheckedCreateInput;
+    };
 
     await prisma.like.create({ data: like });
   }
