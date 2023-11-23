@@ -9,7 +9,13 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 
-export default async function ProfilePage() {
+export default async function ProfilePage({
+  params,
+}: {
+  params: {
+    userId: string;
+  };
+}) {
   const session = await getAuthSession();
 
   if (!session?.user.id) {
